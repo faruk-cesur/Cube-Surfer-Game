@@ -8,10 +8,16 @@ public class PlayerController : MonoBehaviour
 {
     public float speed;
     public float swipeValue;
+
+    public Transform upper;
+    public Transform cubeSpawnPos;
+    public Transform cubeRoot;
     public Transform playerModelRoot;
     public float maxDistanceX;
     private float _dirX;
     private float _mousePosX;
+
+    public GameObject spawnCube;
 
     private void PlayerMovement()
     {
@@ -50,5 +56,13 @@ public class PlayerController : MonoBehaviour
             default:
                 throw new ArgumentOutOfRangeException();
         }
+    }
+
+    public void CollectCube()
+    {
+        Vector3 pos = upper.localPosition;
+        pos.y += 1;
+        upper.localPosition = pos;
+        Instantiate(spawnCube, cubeSpawnPos.position, transform.rotation, cubeRoot);
     }
 }

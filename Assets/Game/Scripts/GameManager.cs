@@ -55,7 +55,6 @@ public class GameManager : MonoBehaviour
             CurrentGameState = GameState.MainGame;
             break;
          case GameState.MainGame:
-            CurrentGameState = GameState.FinishGame;
             break;
          case GameState.FinishGame:
             break;
