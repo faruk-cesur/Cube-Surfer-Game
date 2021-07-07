@@ -21,6 +21,13 @@ public class PlayerController : MonoBehaviour
 
     private void PlayerMovement()
     {
+        if (Input.touchCount > 0)
+        {
+            Touch touch = Input.touches[0];
+            float movePow = touch.deltaPosition.normalized.x;
+            Debug.Log(touch.position);
+        }
+        
         Vector3 dir = transform.forward * Time.deltaTime * speed;
         if (Input.GetMouseButtonDown(0))
         {
