@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -13,6 +14,7 @@ public class PlayerController : MonoBehaviour
     public GameObject spawnedCube;
     private Touch touch;
     private Vector2 myTouchPosition;
+    [HideInInspector] public bool finishCam;
 
 
     // GetMouseButtonDown = TouchPhase.Began
@@ -67,8 +69,31 @@ public class PlayerController : MonoBehaviour
     public void CollectCube()
     {
         Vector3 upwardsPosition = upwards.localPosition;
-        upwardsPosition.y += 1;
+        upwardsPosition.y += 0.7f;
         upwards.localPosition = upwardsPosition;
         Instantiate(spawnedCube, cubeSpawner.position, transform.rotation, cubeRoot);
+    }
+    
+   
+
+    public void PlayerSpeedDown()
+    {
+        StartCoroutine(FinishGame());
+    }
+
+    IEnumerator FinishGame()
+    {
+        float timer = 0;
+        float fixSpeed = playerSpeed;
+        while (true)
+        {
+            timer += Time.deltaTime;
+            playerSpeed = Mathf.Lerp(fixSpeed, 0, timer);
+            if (timer >= 1f)
+            {
+                break;
+            }
+            yield return new WaitForEndOfFrame();
+        }
     }
 }

@@ -5,12 +5,15 @@ using UnityEngine;
 
 public class CollectableCube : MonoBehaviour
 {
+    private bool _isTriggered;
     private void OnTriggerEnter(Collider other)
     {
-        PlayerController player = other.GetComponentInParent<PlayerController>();
-        if (player)
+        
+        CollectCube collectCube = other.GetComponentInParent<CollectCube>();
+        if (collectCube && !_isTriggered)
         {
-            player.CollectCube();
+            _isTriggered = true;
+            GameManager.gameManager.player.CollectCube();
             Destroy(gameObject);
         }
     }
