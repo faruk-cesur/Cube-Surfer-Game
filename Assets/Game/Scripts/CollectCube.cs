@@ -4,5 +4,5 @@ using UnityEngine;
 
 public class CollectCube : MonoBehaviour
 {
-    
+    // This script is using for reference just like using tags.
 }

@@ -6,6 +6,7 @@ public class Obstacle : MonoBehaviour
     public PlayerController player;
     private bool _isTriggered;
 
+    // Using enum state for obstacles
     public enum ObstacleType
     {
         Cube,
@@ -14,6 +15,7 @@ public class Obstacle : MonoBehaviour
 
     public ObstacleType currentObstacleType;
 
+    // Doing things when we trigger with an obstacle according to its type
     private void OnTriggerEnter(Collider other)
     {
         CollectCube collectCube = other.gameObject.GetComponentInParent<CollectCube>();
@@ -27,6 +29,7 @@ public class Obstacle : MonoBehaviour
                     case ObstacleType.Cube:
                         break;
                     case ObstacleType.Pool:
+                        AudioSource.PlayClipAtPoint(GameManager.gameManager.fireSound,GameManager.gameManager.player.transform.position);
                         Destroy(collectCube.gameObject);
                         break;
                     default:
@@ -43,6 +46,7 @@ public class Obstacle : MonoBehaviour
                 switch (currentObstacleType)
                 {
                     case ObstacleType.Cube:
+                        AudioSource.PlayClipAtPoint(GameManager.gameManager.fallSound,player.transform.position);
                         Destroy(collectCube.gameObject);
                         break;
                     case ObstacleType.Pool:
